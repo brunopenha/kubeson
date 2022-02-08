@@ -12,7 +12,6 @@ import com.fvp.kubeson.common.gui.MainToolbar;
 import com.fvp.kubeson.common.gui.Notifications;
 import com.fvp.kubeson.common.gui.TabBase;
 import com.fvp.kubeson.common.util.ThreadFactory;
-import com.sun.javafx.text.GlyphLayout;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.css.PseudoClass;
@@ -50,13 +49,13 @@ public class Main extends Application {
         System.setProperty("java.net.useSystemProxies", "true");
 
         // Very ugly hack to use BreakIterator.getLineInstance() for word wrapping. Probably not version safe.
-        try {
-            Field isIdeographicMethod = GlyphLayout.class.getDeclaredField("isIdeographicMethod");
-            isIdeographicMethod.setAccessible(true);
-            isIdeographicMethod.set(null, Main.class.getMethod("alwaysTrue", int.class));
-        } catch (Exception e) {
-            LOGGER.error("Failed to hack JavaFx to use BreakIterator.getLineInstance() for word wrapping", e);
-        }
+//        try {
+//            Field isIdeographicMethod = GlyphLayout.class.getDeclaredField("isIdeographicMethod");
+//            isIdeographicMethod.setAccessible(true);
+//            isIdeographicMethod.set(null, Main.class.getMethod("alwaysTrue", int.class));
+//        } catch (Exception e) {
+//            LOGGER.error("Failed to hack JavaFx to use BreakIterator.getLineInstance() for word wrapping", e);
+//        }
 
         launch(args);
     }

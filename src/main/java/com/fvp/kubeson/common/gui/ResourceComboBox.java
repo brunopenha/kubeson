@@ -9,7 +9,7 @@ import com.fvp.kubeson.common.model.ItemType;
 import com.fvp.kubeson.common.model.SelectedItem;
 import com.fvp.kubeson.common.model.SelectorItem;
 import com.fvp.kubeson.common.model.TabType;
-import com.sun.javafx.scene.control.skin.ComboBoxListViewSkin;
+import javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
@@ -98,7 +98,7 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
         return new ComboBoxListViewSkin<SelectorItem>(this) {
 
             // overridden to prevent the popup from disappearing
-            @Override
+//            @Override
             protected boolean isHideOnClickEnabled() {
                 return false;
             }

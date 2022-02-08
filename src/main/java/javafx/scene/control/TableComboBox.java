@@ -27,8 +27,6 @@ package javafx.scene.control;
 
 import java.lang.ref.WeakReference;
 
-import com.sun.javafx.scene.control.skin.ComboBoxListViewSkin;
-import com.sun.javafx.scene.control.skin.TableComboBoxListViewSkin;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.WeakInvalidationListener;
@@ -495,7 +493,6 @@ public class TableComboBox<T> extends ComboBoxBase<T> {
     public final ReadOnlyObjectProperty<TextField> editorProperty() {
         if (editor == null) {
             editor = new ReadOnlyObjectWrapper<>(this, "editor");
-            textField = new ComboBoxListViewSkin.FakeFocusTextField();
             editor.set(textField);
         }
         return editor.getReadOnlyProperty();
@@ -526,10 +523,10 @@ public class TableComboBox<T> extends ComboBoxBase<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
-    protected Skin<?> createDefaultSkin() {
-        return new TableComboBoxListViewSkin<>(this);
-    }
+//    @Override
+//    protected Skin<?> createDefaultSkin() {
+//        return new TableComboBoxListViewSkin<>(this);
+//    }
 
     /***************************************************************************
      *                                                                         *
