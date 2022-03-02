@@ -50,4 +50,11 @@ Also, it was mannually included this info in MANIFEST.MF file because Log4J issu
 Multi-Release: true
 ```
 
+# Create the installation file (for Windows)
+
+To create an exe file, execute the following command:
+
+```bash
+jpackage --type exe --input . --dest gerado --main-jar .\kubeson.jar --main-class br.nom.penha.bruno.SuperMain --module-path "<DOWNLOAD FROM https://download2.gluonhq.com/openjfx/17.0.2/openjfx-17.0.2_windows-x64_bin-jmods.zip>" --add-modules javafx.controls,javafx.fxml 
+```
 
