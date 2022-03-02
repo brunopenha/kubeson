@@ -89,8 +89,8 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
             }
         });
 
-        this.iconDelete = Main.getImage("icons/delete_13x13.png");
-        this.iconMetrics = Main.getImage("icons/pie_13x13.png");
+        this.iconDelete = Main.getImage("/icons/delete_13x13.png");
+        this.iconMetrics = Main.getImage("/icons/pie_13x13.png");
     }
 
     @Override

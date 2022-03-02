@@ -73,11 +73,11 @@ public class Main extends Application {
 
     public static List<Image> getAppIcons() {
         List<Image> ret = new ArrayList<>();
-        Image img = getImage("icons/app16.png");
+        Image img = getImage("/icons/app16.png");
         if (img != null) {
             ret.add(img);
         }
-        img = getImage("icons/app32.png");
+        img = getImage("/icons/app32.png");
         if (img != null) {
             ret.add(img);
         }
@@ -85,7 +85,7 @@ public class Main extends Application {
     }
 
     public static Image getImage(String path) {
-        InputStream is = Main.class.getClassLoader().getResourceAsStream(path);
+        InputStream is = Main.class.getResourceAsStream(path);
         if (is != null) {
             return new Image(is);
         }

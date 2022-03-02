@@ -5,12 +5,12 @@ import br.nom.penha.bruno.kubeson.common.gui.TabPillButtonList;
 import javafx.scene.image.Image;
 
 public enum LogCategory implements TabPillButtonList {
-    SERVICE("SERVICE", "icons/service_35x35.png", "icons/service_16x16.png", null, false),
-    COMMUNICATION_IN("COMMUNICATION", "icons/arrow-up_35x35.png", "icons/arrow-up_16x16.png", "\"flow\":\"IN\"", true),
-    COMMUNICATION_OUT("COMMUNICATION", "icons/arrow-down_35x35.png", "icons/arrow-down_16x16.png", "\"flow\":\"OUT\"", true),
-    DATABASE("DATABASE", "icons/database_35x35.png", "icons/database_16x16.png", null, false),
-    HEALTH("HEALTH", "icons/health_35x35.png", "icons/health_16x16.png", null, false),
-    CRYPTO("CRYPTO", "icons/crypto_35x35.png", "icons/crypto_16x16.png", null, false);
+    SERVICE("SERVICE", "/icons/service_35x35.png", "/icons/service_16x16.png", null, false),
+    COMMUNICATION_IN("COMMUNICATION", "/icons/arrow-up_35x35.png", "/icons/arrow-up_16x16.png", "\"flow\":\"IN\"", true),
+    COMMUNICATION_OUT("COMMUNICATION", "/icons/arrow-down_35x35.png", "/icons/arrow-down_16x16.png", "\"flow\":\"OUT\"", true),
+    DATABASE("DATABASE", "/icons/database_35x35.png", "/icons/database_16x16.png", null, false),
+    HEALTH("HEALTH", "/icons/health_35x35.png", "/icons/health_16x16.png", null, false),
+    CRYPTO("CRYPTO", "/icons/crypto_35x35.png", "/icons/crypto_16x16.png", null, false);
 
     private final Image iconBig;
 

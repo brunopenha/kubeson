@@ -1,0 +1,42 @@
+Manifest-Version: 1.0
+Main-Class: br.nom.penha.bruno.SuperMain
+Multi-Release: true
+Class-Path: builder-annotations-0.22.0.jar log4j-jul-2.17.1.jar javafx-m
+ edia-17.0.1.jar jackson-annotations-2.10.3.jar guava-29.0-jre.jar clien
+ t-java-api-10.0.0.jar jackson-module-jaxb-annotations-2.10.3.jar bcprov
+ -jdk15on-1.66.jar jna-5.6.0.jar listenablefuture-9999.0-empty-to-avoid-
+ conflict-with-guava.jar snakeyaml-1.27.jar javafx-media-17.0.1-win.jar 
+ log4j-api-2.17.1.jar failureaccess-1.0.1.jar protobuf-java-3.13.0.jar j
+ ackson-datatype-jsr310-2.13.1.jar delight-rhino-sandbox-0.0.15.jar kube
+ rnetes-model-common-5.12.1.jar logging-interceptor-3.12.12.jar swagger-
+ annotations-1.6.2.jar jackson-core-2.10.3.jar bcpkix-jdk15on-1.66.jar c
+ lient-java-proto-10.0.0.jar kubernetes-model-discovery-5.12.1.jar simpl
+ eclient_httpserver-0.9.0.jar kubernetes-model-apiextensions-5.12.1.jar 
+ jakarta.xml.bind-api-2.3.2.jar gson-fire-1.8.4.jar ini4j-0.5.4.jar slf4
+ j-api-1.7.25.jar proxy-vole-1.0.16.jar kubernetes-model-autoscaling-5.1
+ 2.1.jar jackson-dataformat-yaml-2.10.3.jar javafx-graphics-17.0.1.jar k
+ ubernetes-model-extensions-5.12.1.jar javafx-fxml-17.0.1-win.jar rhino-
+ runtime-1.7.13.jar reactfx-2.0-M5.jar log4j-slf4j-impl-2.17.1.jar joda-
+ convert-2.2.1.jar kubernetes-model-apps-5.12.1.jar automaton-1.11-8.jar
+  sundr-codegen-0.22.0.jar zjsonpatch-0.3.0.jar kubernetes-model-core-5.
+ 12.1.jar javafx-graphics-17.0.1-win.jar checker-qual-2.11.1.jar jna-pla
+ tform-5.6.0.jar joda-time-2.10.6.jar javafx-fxml-17.0.1.jar okhttp-3.12
+ .12.jar javafx-web-17.0.1.jar gson-2.8.6.jar jose4j-0.7.2.jar simplecli
+ ent_common-0.9.0.jar kubernetes-model-events-5.12.1.jar flowless-0.6.1.
+ jar kubernetes-model-networking-5.12.1.jar commons-codec-1.15.jar log4j
+ -core-2.17.1.jar simpleclient-0.9.0.jar commons-compress-1.20.jar jacks
+ on-databind-2.10.3.jar kubernetes-model-rbac-5.12.1.jar error_prone_ann
+ otations-2.3.4.jar generex-1.0.2.jar commons-lang3-3.12.0.jar kubernete
+ s-model-flowcontrol-5.12.1.jar kubernetes-model-metrics-5.12.1.jar java
+ fx-controls-17.0.1-win.jar kubernetes-client-5.12.1.jar javafx-base-17.
+ 0.1-win.jar resourcecify-annotations-0.22.0.jar j2objc-annotations-1.3.
+ jar kubernetes-model-node-5.12.1.jar kubernetes-model-admissionregistra
+ tion-5.12.1.jar client-java-10.0.0.jar kubernetes-model-scheduling-5.12
+ .1.jar javafx-web-17.0.1-win.jar kubernetes-model-certificates-5.12.1.j
+ ar jsr305-3.0.2.jar kubernetes-model-storageclass-5.12.1.jar controlsfx
+ -8.40.15.jar kubernetes-model-coordination-5.12.1.jar javafx-controls-1
+ 7.0.1.jar javax.annotation-api-1.3.2.jar jakarta.activation-api-1.2.1.j
+ ar sundr-core-0.22.0.jar kubernetes-model-policy-5.12.1.jar javafx-base
+ -17.0.1.jar okio-1.15.0.jar bcprov-ext-jdk15on-1.66.jar commons-collect
+ ions4-4.4.jar kubernetes-model-batch-5.12.1.jar
+

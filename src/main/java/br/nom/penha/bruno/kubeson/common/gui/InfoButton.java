@@ -24,9 +24,9 @@ public final class InfoButton {
 
     static {
         infoLabel = new Label();
-        blueInfo = Main.getImage("icons/info-blue.png");
-        yellowInfo = Main.getImage("icons/info-yellow.png");
-        redInfo = Main.getImage("icons/info-red.png");
+        blueInfo = Main.getImage("/icons/info-blue.png");
+        yellowInfo = Main.getImage("/icons/info-yellow.png");
+        redInfo = Main.getImage("/icons/info-red.png");
 
         imageView = new ImageView(blueInfo);
     }
