@@ -24,6 +24,7 @@
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-exec-plugin.version>1.6.0</maven-exec-plugin.version>
         <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
+        <maven-ant-run-plugin.version>1.8</maven-ant-run-plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -222,6 +223,40 @@
                                     </excludes>
                                 </filter>
                             </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ant-run-plugin</artifactId>
+                <version>${maven-ant-run-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>create-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <exec executable="jpackage" failonerror="true">
+                                    <arg line="--version"/>
+                                </exec>
+                                <exec executable="jpackage" failonerror="true">
+                                    <arg line="--help"/>
+                                </exec>
+                                <exec executable="jpackage" failonerror="true">
+                                    <arg line="--input target/dist"/>
+                                    <arg line="--main-jar ${project.artifactId}-${project.version}.jar"/>
+                                    <arg line="--main-class br.nom.penha.bruno.SuperMain"/>
+                                    <arg line="--dest target"/>
+                                    <arg line="--name ${project.artifactId}"/>
+                                    <arg line="--app-version ${project.version}"/>
+                                    <arg line="--type exe"/>
+                                    <arg line="--verbose"/>
+                                </exec>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>

@@ -58,3 +58,9 @@ To create an exe file, execute the following command:
 jpackage --type exe --input . --dest gerado --main-jar .\kubeson.jar --main-class br.nom.penha.bruno.SuperMain --module-path "<DOWNLOAD FROM https://download2.gluonhq.com/openjfx/17.0.2/openjfx-17.0.2_windows-x64_bin-jmods.zip>" --add-modules javafx.controls,javafx.fxml 
 ```
 
+Another way to create it, is using this [packr](https://github.com/libgdx/packr)  tool
+
+```bash
+java -jar packr-all.jar --platform windows64 --jdk "PATH_TO_JDK_17.0.2" --useZgcIfSupportedOs --executable Kubeson --classpath kubeson.jar --mainclass br.nom.penha.bruno.SuperMain --vmargs Xmx1G --output out-win
+```
+This allow to export JRE together with exe file
