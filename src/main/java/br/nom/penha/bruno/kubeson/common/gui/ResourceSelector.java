@@ -5,25 +5,39 @@ import br.nom.penha.bruno.kubeson.common.controller.K8SClientListener;
 import br.nom.penha.bruno.kubeson.common.controller.K8SResourceChange;
 import br.nom.penha.bruno.kubeson.common.model.K8SConfigMap;
 import br.nom.penha.bruno.kubeson.common.model.K8SPod;
+import io.fabric8.kubernetes.client.NamespacedKubernetesClient;
+import io.kubernetes.client.openapi.ApiClient;
+import io.kubernetes.client.openapi.ApiException;
+import io.kubernetes.client.openapi.apis.CoreV1Api;
+import io.kubernetes.client.openapi.models.V1NamespaceList;
+import io.kubernetes.client.util.Config;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+
 public final class ResourceSelector {
 
     private static final String DEFAULT_NAMESPACE = "default";
 
+    private NamespacedKubernetesClient namespaces;
+
     private static ChoiceBox<String> namespaceBox;
+
+    private static ObservableList<String> namespaceList = FXCollections.observableArrayList();
 
     private static ResourceComboBox resourceBox;
 
     private static String selectedNamespace;
 
     static {
-        selectedNamespace = DEFAULT_NAMESPACE;
+        //selectedNamespace = DEFAULT_NAMESPACE;
         init();
     }
 
@@ -31,10 +45,28 @@ public final class ResourceSelector {
     }
 
     private static void init() {
+
+
         namespaceBox = new ChoiceBox<>();
         namespaceBox.setMinWidth(110);
         namespaceBox.maxWidth(110);
         namespaceBox.setPrefWidth(110);
+        ApiClient client  = null;
+        V1NamespaceList lista;
+        try {
+            client = Config.defaultClient();
+            CoreV1Api api = new CoreV1Api(client);
+            lista = api.listNamespace(null,null,null,null,null,null,null,10,false);
+            lista.getItems()
+                    .stream()
+                    .map((namespace) -> namespace.getMetadata().getName() )
+                    .forEach((name) -> namespaceList.add(name));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ApiException e) {
+            throw new RuntimeException(e);
+        }
+
         namespaceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedNamespace = newValue;
@@ -56,6 +88,9 @@ public final class ResourceSelector {
                 Platform.runLater(ResourceSelector::update);
             }
         });
+
+        namespaceBox.setItems(namespaceList);
+
     }
 
     private static void update() {
@@ -64,8 +99,9 @@ public final class ResourceSelector {
     }
 
     private static void updateNamespaceBox() {
-        namespaceBox.getItems().clear();
-        namespaceBox.getItems().addAll(K8SClient.getNamespaces());
+//        namespaceBox.getItems().clear();
+        namespaceBox.setItems(namespaceList);
+//        namespaceBox.getItems().addAll(K8SClient.getNamespaces());
         namespaceBox.getSelectionModel().select(selectedNamespace);
     }
 
@@ -94,4 +130,11 @@ public final class ResourceSelector {
         return gridPane;
     }
 
+    public static String getSelectedNamespace() {
+        return selectedNamespace;
+    }
+
+    public static ObservableList<String> getNamespaceList() {
+        return namespaceList;
+    }
 }

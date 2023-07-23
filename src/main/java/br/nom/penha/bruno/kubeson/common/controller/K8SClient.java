@@ -2,16 +2,15 @@ package br.nom.penha.bruno.kubeson.common.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import br.nom.penha.bruno.kubeson.Configuration;
+import br.nom.penha.bruno.kubeson.common.gui.ResourceSelector;
 import br.nom.penha.bruno.kubeson.common.model.ItemType;
 import br.nom.penha.bruno.kubeson.common.model.K8SConfigMap;
 import br.nom.penha.bruno.kubeson.common.model.K8SPod;
@@ -24,7 +23,9 @@ import io.fabric8.kubernetes.api.model.ServicePort;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClientException;
+import io.fabric8.kubernetes.client.NamespacedKubernetesClient;
 import io.fabric8.kubernetes.client.dsl.LogWatch;
+import javafx.collections.ObservableList;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -66,7 +67,7 @@ public final class K8SClient {
                 startClient();
                 for (; ; ) {
                     TimeUnit.MILLISECONDS.sleep(Configuration.KUBERNETES_WORKER_WAIT_TIME_MS);
-                    updatePods();
+                    updatePods(ResourceSelector.getSelectedNamespace());
                     updateConfigMaps();
                 }
             } catch (InterruptedException e) {
@@ -93,14 +94,14 @@ public final class K8SClient {
         }
     }
 
-    private static void updatePods() {
+    private static void updatePods(String namespace) {
         K8SResourceChange<K8SPod> changes = new K8SResourceChange<>();
 
         try {
             final long flag = random.nextLong();
 
             // Add New Pods
-            client.pods().list().getItems().forEach(pod -> {
+            client.pods().inNamespace(namespace).list().getItems().forEach(pod -> {
                 if (!K8SPod.STATUS_PENDING.equals(pod.getStatus().getPhase())) {
                     K8SPod oldPod = pods.get(pod.getMetadata().getUid());
                     if (oldPod != null) {
@@ -207,10 +208,11 @@ public final class K8SClient {
         }
     }
 
-    public static Set<String> getNamespaces() {
-        final Set<String> namespaces = new HashSet<>();
-        pods.forEach((uid, pod) -> namespaces.add(pod.getNamespace()));
-        return namespaces;
+    public static ObservableList<String> getNamespaces() {
+//        final Set<String> namespaces = new HashSet<>();
+//        pods.forEach((uid, pod) -> namespaces.add(pod.getNamespace()));
+//        return namespaces;
+        return ResourceSelector.getNamespaceList();
     }
 
     public static List<SelectorItem> getPodSelectorList(String namespace) {
