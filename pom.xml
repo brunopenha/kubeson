@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>br.nom.penha.bruno</groupId>
     <artifactId>kubeson</artifactId>
@@ -15,7 +15,7 @@
         <flowless.version>0.6.1</flowless.version>
         <jackson.version>2.10.3</jackson.version>
         <proxy-vole.version>1.0.16</proxy-vole.version>
-        <controlsfx.version>8.40.15</controlsfx.version>
+        <controlsfx.version>11.1.2</controlsfx.version>
         <io.kubernetes.client-java.version>10.0.0</io.kubernetes.client-java.version>
         <!-- Plugins -->
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
@@ -25,7 +25,7 @@
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-exec-plugin.version>1.6.0</maven-exec-plugin.version>
         <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
-        <maven-ant-run-plugin.version>1.8</maven-ant-run-plugin.version>
+        <maven-ant-run-plugin.version>1.9.4</maven-ant-run-plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -184,7 +184,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx.maven.plugin.version}</version>
                 <configuration>
-                    <!--                    <mainClass>br.nom.penha.bruno.App</mainClass>-->
+                    <mainClass>br.nom.penha.bruno.SuperMain</mainClass>
                     <compress>2</compress>
                     <noHeaderFiles>true</noHeaderFiles>
                     <stripDebug>true</stripDebug>
@@ -193,7 +193,6 @@
                     <launcher>kubeson</launcher>
                     <jlinkImageName>kubeson</jlinkImageName>
                     <jlinkZipName>kubeson</jlinkZipName>
-                    <mainClass>br.nom.penha.bruno.SuperMain</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -212,7 +211,7 @@
                             <outputFile>shade\${project.artifactId}.jar</outputFile>
                             <transformers>
                                 <transformer implementation=
-                                    "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                                     "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>br.nom.penha.bruno.SuperMain</mainClass>
                                 </transformer>
                             </transformers>
@@ -230,40 +229,40 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-ant-run-plugin</artifactId>
-                <version>${maven-ant-run-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>create-artifacts</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target>
-                                <exec executable="jpackage" failonerror="true">
-                                    <arg line="--version"/>
-                                </exec>
-                                <exec executable="jpackage" failonerror="true">
-                                    <arg line="--help"/>
-                                </exec>
-                                <exec executable="jpackage" failonerror="true">
-                                    <arg line="--input target/dist"/>
-                                    <arg line="--main-jar ${project.artifactId}-${project.version}.jar"/>
-                                    <arg line="--main-class br.nom.penha.bruno.SuperMain"/>
-                                    <arg line="--dest target"/>
-                                    <arg line="--name ${project.artifactId}"/>
-                                    <arg line="--app-version ${project.version}"/>
-                                    <arg line="--type exe"/>
-                                    <arg line="--verbose"/>
-                                </exec>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-ant-run-plugin</artifactId>-->
+<!--                <version>${maven-ant-run-plugin.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>create-artifacts</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>run</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <target>-->
+<!--                                <exec executable="jpackage" failonerror="true">-->
+<!--                                    <arg line="&#45;&#45;version"/>-->
+<!--                                </exec>-->
+<!--                                <exec executable="jpackage" failonerror="true">-->
+<!--                                    <arg line="&#45;&#45;help"/>-->
+<!--                                </exec>-->
+<!--                                <exec executable="jpackage" failonerror="true">-->
+<!--                                    <arg line="&#45;&#45;input target/dist"/>-->
+<!--                                    <arg line="&#45;&#45;main-jar ${project.artifactId}-${project.version}.jar"/>-->
+<!--                                    <arg line="&#45;&#45;main-class br.nom.penha.bruno.SuperMain"/>-->
+<!--                                    <arg line="&#45;&#45;dest target"/>-->
+<!--                                    <arg line="&#45;&#45;name ${project.artifactId}"/>-->
+<!--                                    <arg line="&#45;&#45;app-version ${project.version}"/>-->
+<!--                                    <arg line="&#45;&#45;type exe"/>-->
+<!--                                    <arg line="&#45;&#45;verbose"/>-->
+<!--                                </exec>-->
+<!--                            </target>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 </project>

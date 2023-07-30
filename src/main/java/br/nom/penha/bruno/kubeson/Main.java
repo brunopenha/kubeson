@@ -32,7 +32,7 @@ public class Main extends Application {
     // Workaround fix JVM bug JDK-8146479
     private static final PseudoClass ICONIFIED_PSEUDO_CLASS = PseudoClass.getPseudoClass("iconified");
 
-    private static Logger LOGGER = LogManager.getLogger();
+    private static Logger LOGGER = LogManager.getLogger(Main.class);
 
     private static Application application;
 
@@ -47,14 +47,6 @@ public class Main extends Application {
         System.setProperty("java.util.logging.config.file", "");
         System.setProperty("java.net.useSystemProxies", "true");
 
-        // Very ugly hack to use BreakIterator.getLineInstance() for word wrapping. Probably not version safe.
-//        try {
-//            Field isIdeographicMethod = GlyphLayout.class.getDeclaredField("isIdeographicMethod");
-//            isIdeographicMethod.setAccessible(true);
-//            isIdeographicMethod.set(null, Main.class.getMethod("alwaysTrue", int.class));
-//        } catch (Exception e) {
-//            LOGGER.error("Failed to hack JavaFx to use BreakIterator.getLineInstance() for word wrapping", e);
-//        }
 
         launch(args);
     }

@@ -12,6 +12,7 @@ module br.nom.penha.bruno {
     requires proxy.vole;
     requires controlsfx;
     requires okhttp3;
+    requires javax.api;
     exports br.nom.penha.bruno;
     exports br.nom.penha.bruno.controller;
     opens br.nom.penha.bruno.controller to javafx.fxml;

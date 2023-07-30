@@ -44,7 +44,7 @@ import org.apache.logging.log4j.Logger;
 
 public class LogTab extends TabBase<LogToolbar> {
 
-    private static Logger LOGGER = LogManager.getLogger();
+    private static Logger LOGGER = LogManager.getLogger(LogTab.class);
 
     private int logLineId;
 
@@ -200,9 +200,12 @@ public class LogTab extends TabBase<LogToolbar> {
 
         // Start printing log lines
         selectedItems.forEach(selectedItem -> {
-            selectedItem.getPod()
-                    .addListener(selectedItem.getContainer(), getLogSource(selectedItem.getText(), selectedItems.size()), this.podLogFeedListener,
-                            showLogsFromStart);
+            LOGGER.error("selectedItem -> " + selectedItem.getText());
+            if(null != selectedItem.getPod()){
+                selectedItem.getPod()
+                        .addListener(selectedItem.getContainer(), getLogSource(selectedItem.getText(), selectedItems.size()), this.podLogFeedListener,
+                                showLogsFromStart);
+            }
         });
     }
 

@@ -1,11 +1,15 @@
 package br.nom.penha.bruno.kubeson;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import javafx.scene.paint.Color;
 
 public final class Configuration {
+
+    private final Properties propriedadesCorreio;
 
     public static final String APP_NAME = "Kubeson - Kubernetes Json Log Viewer";
 
@@ -49,4 +53,14 @@ public final class Configuration {
     public static final int MAX_METRICS_VALUE_HISTORY = 6;
 
     public static final long METRICS_AUTOMATIC_REFRESH_DELAY_MS = 2000;
+
+    public Configuration() {
+        this.propriedadesCorreio = new Properties();
+
+        try {
+            propriedadesCorreio.load(getClass().getResourceAsStream("/configuracoes.properties"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

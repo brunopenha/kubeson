@@ -23,6 +23,7 @@ public class SelectorItem implements Comparable<SelectorItem> {
 
     public SelectorItem(K8SPod pod, String key, String text, ItemType type) {
         this.disabled = new SimpleBooleanProperty();
+        this.checked = new SimpleBooleanProperty();
         this.key = key;
         this.text = text;
         this.type = type;
@@ -32,6 +33,7 @@ public class SelectorItem implements Comparable<SelectorItem> {
 
     public SelectorItem(K8SPod pod, String text, ItemType type) {
         this.disabled = new SimpleBooleanProperty();
+        this.checked = new SimpleBooleanProperty();
         this.text = text;
         this.type = type;
         this.pod = pod;
@@ -40,6 +42,7 @@ public class SelectorItem implements Comparable<SelectorItem> {
 
     public SelectorItem(K8SConfigMap configMap, String text, ItemType type) {
         this.disabled = new SimpleBooleanProperty();
+        this.checked = new SimpleBooleanProperty();
         this.text = text;
         this.type = type;
         this.configMap = configMap;
@@ -47,6 +50,7 @@ public class SelectorItem implements Comparable<SelectorItem> {
 
     public SelectorItem(String text) {
         this.disabled = new SimpleBooleanProperty();
+        this.checked = new SimpleBooleanProperty();
         this.text = text;
         this.type = ItemType.TEXT;
         this.style = "-fx-font-weight: bolder;-fx-font-size: 14px;";

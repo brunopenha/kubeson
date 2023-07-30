@@ -45,6 +45,6 @@ public class SelectedItem {
     }
 
     public boolean isRunning() {
-        return this.pod.isRunning(container);
+        return this.pod != null ? this.pod.isRunning(container) : false;
     }
 }

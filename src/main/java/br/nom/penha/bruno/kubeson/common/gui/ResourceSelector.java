@@ -1,5 +1,6 @@
 package br.nom.penha.bruno.kubeson.common.gui;
 
+import br.nom.penha.bruno.kubeson.Main;
 import br.nom.penha.bruno.kubeson.common.controller.K8SClient;
 import br.nom.penha.bruno.kubeson.common.controller.K8SClientListener;
 import br.nom.penha.bruno.kubeson.common.controller.K8SResourceChange;
@@ -15,12 +16,15 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.net.NoRouteToHostException;
 
 public final class ResourceSelector {
 
@@ -46,7 +50,6 @@ public final class ResourceSelector {
 
     private static void init() {
 
-
         namespaceBox = new ChoiceBox<>();
         namespaceBox.setMinWidth(110);
         namespaceBox.maxWidth(110);
@@ -64,7 +67,12 @@ public final class ResourceSelector {
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ApiException e) {
-            throw new RuntimeException(e);
+            System.out.println("Kubeson was not able to connect to Kubernetes.");
+            Platform.runLater(() -> {
+                Alert dialog = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
+                dialog.show();
+            });
+            //throw new RuntimeException(e);
         }
 
         namespaceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {

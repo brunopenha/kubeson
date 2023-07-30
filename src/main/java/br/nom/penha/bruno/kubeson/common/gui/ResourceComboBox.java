@@ -19,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.Skin;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,8 +27,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ResourceComboBox extends ComboBox<SelectorItem> {
+
+    private static Logger LOGGER = LogManager.getLogger(ResourceComboBox.class);
 
     private static int groupNumber;
 
@@ -39,6 +44,8 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
 
     private Image iconMetrics;
 
+    private String valorClicado;
+
     public ResourceComboBox() {
         super.getStyleClass().add("selector-pod-name");
         super.setFocusTraversable(false);
@@ -49,7 +56,13 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
             listView.setMinWidth(500);
             listView.setPrefWidth(500);
             CheckBoxListCell result = new CheckBoxListCell();
-            result.setOnMouseClicked(e -> super.hide());
+            result.setOnMouseClicked(e -> {
+                        LOGGER.error("Event: " + e.toString());
+                        LOGGER.error("e.getTarget(): " + e.getTarget());
+                        LOGGER.error("e.getEventType().getName(): " + e.getEventType().getName());
+                        //super.hide();
+                    }
+            );
 
             return result;
         });
@@ -58,14 +71,20 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
 
             @Override
             protected void updateItem(SelectorItem item, boolean empty) {
+
             }
         });
 
+
         super.showingProperty().addListener((observable, oldValue, newValue) -> {
+
+
             if (!newValue) {
                 List<SelectedItem> selected = new ArrayList<>();
                 for (SelectorItem item : getItems()) {
+
                     if (item.isChecked()) {
+                        System.out.println("Clicked: " + item.isChecked());
                         selected.add(new SelectedItem(item));
                         item.setChecked(false);
                     }

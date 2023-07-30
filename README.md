@@ -61,6 +61,20 @@ jpackage --type exe --input . --dest gerado --main-jar .\kubeson.jar --main-clas
 Another way to create it, is using this [packr](https://github.com/libgdx/packr)  tool
 
 ```bash
-java -jar packr-all.jar --platform windows64 --jdk "PATH_TO_JDK_17.0.2" --useZgcIfSupportedOs --executable Kubeson --classpath kubeson.jar --mainclass br.nom.penha.bruno.SuperMain --vmargs Xmx1G --output out-win
+java -jar packr-all.jar --platform windows64 --jdk "PATH_TO_JDK_17.0.2" --useZgcIfSupportedOs --executable Kubeson --classpath kubeson.jar --mainclass br.nom.penha.bruno.SuperMain --vmargs Xmx1G --output gerado-win
 ```
 This allow to export JRE together with exe file
+
+# Create the installation file (for Linux)
+
+To create an exe file, execute the following command:
+
+```bash
+jpackage --dest gerado-linux --app-version '2.1.0' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/app64.png --input shade --main-jar shade/kubeson.jar --main-class br.nom.penha.bruno.SuperMain 
+```
+
+And if you got this error during this execution, one possible soluction is by installing `fakeroot` on your Debian, like this:
+
+```bash
+sudo apt install fakeroot
+```
