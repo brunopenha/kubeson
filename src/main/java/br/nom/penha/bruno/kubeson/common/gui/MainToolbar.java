@@ -31,6 +31,9 @@ public final class MainToolbar {
         // Set Info Button
         toolbar.getItems().add(InfoButton.draw());
 
+        // Setup Button
+        toolbar.getItems().add(InfoButton.draw());
+
         return toolbar;
     }
 

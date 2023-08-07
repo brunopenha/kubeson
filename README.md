@@ -55,7 +55,7 @@ Multi-Release: true
 To create an exe file, execute the following command:
 
 ```bash
-jpackage --type exe --input . --dest gerado --main-jar .\kubeson.jar --main-class br.nom.penha.bruno.SuperMain --module-path "<DOWNLOAD FROM https://download2.gluonhq.com/openjfx/17.0.2/openjfx-17.0.2_windows-x64_bin-jmods.zip>" --add-modules javafx.controls,javafx.fxml 
+jpackage --type exe --input shade --dest gerado-win --main-jar kubeson.jar --main-class br.nom.penha.bruno.SuperMain --module-path "<DOWNLOAD FROM https://download2.gluonhq.com/openjfx/17.0.2/openjfx-17.0.2_windows-x64_bin-jmods.zip>" --add-modules javafx.controls,javafx.fxml
 ```
 
 Another way to create it, is using this [packr](https://github.com/libgdx/packr)  tool

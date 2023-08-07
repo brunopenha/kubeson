@@ -20,6 +20,7 @@ import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.api.model.Service;
 import io.fabric8.kubernetes.api.model.ServiceList;
 import io.fabric8.kubernetes.api.model.ServicePort;
+import io.fabric8.kubernetes.api.model.StatusDetails;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClientException;
@@ -97,47 +98,49 @@ public final class K8SClient {
     private static void updatePods(String namespace) {
         K8SResourceChange<K8SPod> changes = new K8SResourceChange<>();
 
-        try {
-            final long flag = random.nextLong();
+        if (null != namespace) {
+            try {
+                final long flag = random.nextLong();
 
-            // Add New Pods
-            client.pods().inNamespace(namespace).list().getItems().forEach(pod -> {
-                if (!K8SPod.STATUS_PENDING.equals(pod.getStatus().getPhase())) {
-                    K8SPod oldPod = pods.get(pod.getMetadata().getUid());
-                    if (oldPod != null) {
-                        oldPod.setFlag(flag);
-                        if (!oldPod.getState().equals(pod.getStatus().getPhase())) {
-                            oldPod.setState(pod.getStatus().getPhase());
-                            changes.resourceUpdated(oldPod);
+                // Add New Pods
+                client.pods().inNamespace(namespace).list().getItems().forEach(pod -> {
+                    if (!K8SPod.STATUS_PENDING.equals(pod.getStatus().getPhase())) {
+                        K8SPod oldPod = pods.get(pod.getMetadata().getUid());
+                        if (oldPod != null) {
+                            oldPod.setFlag(flag);
+                            if (!oldPod.getState().equals(pod.getStatus().getPhase())) {
+                                oldPod.setState(pod.getStatus().getPhase());
+                                changes.resourceUpdated(oldPod);
+                            }
+                        } else {
+                            K8SPod newPod = new K8SPod(pod, flag);
+                            setMetricsNodePort(newPod);
+                            pods.put(pod.getMetadata().getUid(), newPod);
+                            changes.resourceAdded(newPod);
                         }
-                    } else {
-                        K8SPod newPod = new K8SPod(pod, flag);
-                        setMetricsNodePort(newPod);
-                        pods.put(pod.getMetadata().getUid(), newPod);
-                        changes.resourceAdded(newPod);
                     }
-                }
-            });
-
-            // Terminate Pods
-            pods.forEach((uid, pod) -> {
-                if (pod.getFlag() != flag) {
-                    pod.terminate();
-                    changes.resourceRemoved(pod);
-                    pods.remove(uid);
-                }
-            });
-        } catch (Exception e) {
-            if (k8sClientGetPodsAttempts > Configuration.MAX_KUBERNETES_CLIENT_ATTEMPTS) {
-                LOGGER.error("Failed to get kubernetes pod info after " + Configuration.MAX_KUBERNETES_CLIENT_ATTEMPTS + " attempts. Stopping all pods", e);
-                pods.forEach((uid, pod) -> {
-                    changes.resourceRemoved(pod);
-                    pod.terminate();
                 });
-                pods.clear();
-                k8sClientGetPodsAttempts = 0;
-            } else {
-                k8sClientGetPodsAttempts++;
+
+                // Terminate Pods
+                pods.forEach((uid, pod) -> {
+                    if (pod.getFlag() != flag) {
+                        pod.terminate();
+                        changes.resourceRemoved(pod);
+                        pods.remove(uid);
+                    }
+                });
+            } catch (Exception e) {
+                if (k8sClientGetPodsAttempts > Configuration.MAX_KUBERNETES_CLIENT_ATTEMPTS) {
+                    LOGGER.error("Failed to get kubernetes pod info after " + Configuration.MAX_KUBERNETES_CLIENT_ATTEMPTS + " attempts. Stopping all pods", e);
+                    pods.forEach((uid, pod) -> {
+                        changes.resourceRemoved(pod);
+                        pod.terminate();
+                    });
+                    pods.clear();
+                    k8sClientGetPodsAttempts = 0;
+                } else {
+                    k8sClientGetPodsAttempts++;
+                }
             }
         }
 
@@ -278,9 +281,9 @@ public final class K8SClient {
         k8sListeners.remove(listener);
     }
 
-    public static boolean deletePod(Pod pod) throws K8SApiException {
+    public static List<StatusDetails> deletePod(String namespace, Pod pod) throws K8SApiException {
         try {
-            return client.pods().delete(pod);
+            return client.pods().inNamespace(namespace).withName(pod.getFullResourceName()).delete();
         } catch (Exception e) {
             throw new K8SApiException(e);
         }

@@ -25,6 +25,7 @@ import br.nom.penha.bruno.kubeson.logs.model.LogLine;
 import br.nom.penha.bruno.kubeson.logs.model.LogSource;
 import io.fabric8.kubernetes.api.model.ContainerStatus;
 import io.fabric8.kubernetes.api.model.Pod;
+import io.fabric8.kubernetes.api.model.StatusDetails;
 import io.fabric8.kubernetes.api.model.Volume;
 import io.fabric8.kubernetes.client.dsl.LogWatch;
 import javafx.application.Platform;
@@ -184,7 +185,7 @@ public class K8SPod {
     public void delete(K8SRequestCallback requestCallback) {
         ThreadFactory.newThread(() -> {
             try {
-                K8SClient.deletePod(pod);
+                List<StatusDetails> status = K8SClient.deletePod(getNamespace(),pod);
                 K8SRequestResult.apply(requestCallback, true);
             } catch (K8SApiException e) {
                 LOGGER.error("Failed to delete pod " + getPodName(), e);

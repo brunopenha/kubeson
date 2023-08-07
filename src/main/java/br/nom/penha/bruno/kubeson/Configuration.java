@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 
 public final class Configuration {
 
-    private final Properties propriedadesCorreio;
+    private final Properties propriedadesK8s;
 
     public static final String APP_NAME = "Kubeson - Kubernetes Json Log Viewer";
 
@@ -42,7 +42,7 @@ public final class Configuration {
 
     public static final String GITHUB_TOKEN = "invalido";
 
-    public static final String GITHUB_RELEASES = "https://api.github.com/repos/fvp/kubeson/releases";
+    public static final String GITHUB_RELEASES = "https://api.github.com/repos/brunopenha/kubeson/releases";
 
     public static final int CHECK_FOR_UPGRADE_WORKER_WAIT_TIME_MS = 43200000;
 
@@ -55,10 +55,10 @@ public final class Configuration {
     public static final long METRICS_AUTOMATIC_REFRESH_DELAY_MS = 2000;
 
     public Configuration() {
-        this.propriedadesCorreio = new Properties();
+        this.propriedadesK8s = new Properties();
 
         try {
-            propriedadesCorreio.load(getClass().getResourceAsStream("/configuracoes.properties"));
+            propriedadesK8s.load(getClass().getResourceAsStream("/configuracoes.properties"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

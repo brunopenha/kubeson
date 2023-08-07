@@ -11,7 +11,8 @@
         <javafx.version>17.0.1</javafx.version>
         <log4j.version>2.17.1</log4j.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <kubernetes-client.version>5.12.1</kubernetes-client.version>
+        <!-- https://github.com/fabric8io/kubernetes-client -->
+        <kubernetes-client.version>6.8.0</kubernetes-client.version>
         <flowless.version>0.6.1</flowless.version>
         <jackson.version>2.10.3</jackson.version>
         <proxy-vole.version>1.0.16</proxy-vole.version>

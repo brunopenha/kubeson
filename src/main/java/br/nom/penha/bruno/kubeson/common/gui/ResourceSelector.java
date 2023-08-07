@@ -6,6 +6,10 @@ import br.nom.penha.bruno.kubeson.common.controller.K8SClientListener;
 import br.nom.penha.bruno.kubeson.common.controller.K8SResourceChange;
 import br.nom.penha.bruno.kubeson.common.model.K8SConfigMap;
 import br.nom.penha.bruno.kubeson.common.model.K8SPod;
+import io.fabric8.kubernetes.api.model.NamespaceList;
+import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClientBuilder;
+import io.fabric8.kubernetes.client.KubernetesClientException;
 import io.fabric8.kubernetes.client.NamespacedKubernetesClient;
 import io.kubernetes.client.openapi.ApiClient;
 import io.kubernetes.client.openapi.ApiException;
@@ -15,18 +19,25 @@ import io.kubernetes.client.util.Config;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.NoRouteToHostException;
+import java.net.UnknownHostException;
 
 public final class ResourceSelector {
+
+    private static Logger LOGGER = LogManager.getLogger();
 
     private static final String DEFAULT_NAMESPACE = "default";
 
@@ -54,25 +65,29 @@ public final class ResourceSelector {
         namespaceBox.setMinWidth(110);
         namespaceBox.maxWidth(110);
         namespaceBox.setPrefWidth(110);
-        ApiClient client  = null;
-        V1NamespaceList lista;
+        KubernetesClient client  = null;
+        NamespaceList lista;
+        client =  new KubernetesClientBuilder().build();
         try {
-            client = Config.defaultClient();
-            CoreV1Api api = new CoreV1Api(client);
-            lista = api.listNamespace(null,null,null,null,null,null,null,10,false);
+            lista = client.namespaces().list();
             lista.getItems()
                     .stream()
                     .map((namespace) -> namespace.getMetadata().getName() )
                     .forEach((name) -> namespaceList.add(name));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ApiException e) {
-            System.out.println("Kubeson was not able to connect to Kubernetes.");
+        } catch (KubernetesClientException e) {
             Platform.runLater(() -> {
-                Alert dialog = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage(), ButtonType.OK);
+                Alert dialog = new Alert(Alert.AlertType.ERROR, "Error to connect into minikube: \n Check your minikube then start Kubeson again."
+                        , ButtonType.OK);
+                LOGGER.error(e.getMessage());
+                LOGGER.error(e.getStackTrace());
                 dialog.show();
+                dialog.setOnCloseRequest(new EventHandler<DialogEvent>() {
+                    @Override
+                    public void handle(DialogEvent dialogEvent) {
+                        System.exit(1);
+                    }
+                });
             });
-            //throw new RuntimeException(e);
         }
 
         namespaceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
