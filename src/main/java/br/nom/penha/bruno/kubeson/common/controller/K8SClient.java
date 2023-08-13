@@ -21,10 +21,10 @@ import io.fabric8.kubernetes.api.model.Service;
 import io.fabric8.kubernetes.api.model.ServiceList;
 import io.fabric8.kubernetes.api.model.ServicePort;
 import io.fabric8.kubernetes.api.model.StatusDetails;
+import io.fabric8.kubernetes.api.model.ConfigMapBuilder;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClientException;
-import io.fabric8.kubernetes.client.NamespacedKubernetesClient;
 import io.fabric8.kubernetes.client.dsl.LogWatch;
 import javafx.collections.ObservableList;
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +33,7 @@ import org.apache.logging.log4j.Logger;
 
 public final class K8SClient {
 
-    private static Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private static Random random;
 
@@ -212,9 +212,6 @@ public final class K8SClient {
     }
 
     public static ObservableList<String> getNamespaces() {
-//        final Set<String> namespaces = new HashSet<>();
-//        pods.forEach((uid, pod) -> namespaces.add(pod.getNamespace()));
-//        return namespaces;
         return ResourceSelector.getNamespaceList();
     }
 
@@ -295,7 +292,7 @@ public final class K8SClient {
 
     public static void updateConfigMapData(String namespace, String configMapName, String dataName, String content) throws K8SApiException {
         try {
-            client.configMaps().inNamespace(namespace).withName(configMapName).edit(); //FIXME addToData(dataName, content).done();
+            client.configMaps().inNamespace(namespace).withName(configMapName).edit(c -> new ConfigMapBuilder(c).addToData(dataName, content).build());
         } catch (Exception e) {
             throw new K8SApiException(e);
         }

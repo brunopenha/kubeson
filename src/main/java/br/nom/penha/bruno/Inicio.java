@@ -13,9 +13,12 @@ import javafx.scene.image.Image;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Inicio extends Application {
 
+	private static final Logger logger = LogManager.getLogger(Inicio.class);
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
@@ -28,10 +31,15 @@ public class Inicio extends Application {
 		scene.getStylesheets().add(appCss);
 		primaryStage.getIcons().addAll(getAppIcons());
 		primaryStage.setScene(scene);
-		primaryStage.show();
 	}
 
 	public static void main(String[] args) {
+		logger.debug("My Debug Log");
+		logger.info("My Info Log");
+		logger.warn("My Warn Log");
+		logger.error("My error log");
+		logger.fatal("My fatal log");
+
 		launch(args);
 	}
 
