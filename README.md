@@ -52,25 +52,29 @@ Multi-Release: true
 
 # Create the installation file (for Windows)
 
-To create an exe file, execute the following command:
+To create an exe installer file, execute the following command:
 
 ```bash
-jpackage --type exe --input shade --dest gerado-win --main-jar kubeson.jar --main-class br.nom.penha.bruno.SuperMain --module-path "<DOWNLOAD FROM https://download2.gluonhq.com/openjfx/17.0.2/openjfx-17.0.2_windows-x64_bin-jmods.zip>" --add-modules javafx.controls,javafx.fxml
+jpackage --type exe --input shade --dest gerado-win --main-jar kubeson.jar --main-class br.nom.penha.bruno.SuperMain --module-path "<PATH TO YOUR javafx-jmods-17.0.2>" --add-modules javafx.controls,javafx.fxml,javafx.web --app-version '2.1.1' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/kubeson.ico  --jlink-options --bind-services --verbose --win-console --win-shortcut --win-menu
+```
+To create a quick exe from jar
+```bash
+jpackage --type app-image --input shade --dest gerado-win --main-jar kubeson.jar --main-class br.nom.penha.bruno.SuperMain --module-path "<PATH TO YOUR javafx-jmods-17.0.2>" --add-modules javafx.controls,javafx.fxml,javafx.web --app-version '2.1.1' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/kubeson.ico  --jlink-options --bind-services --verbose --win-console
 ```
 
 Another way to create it, is using this [packr](https://github.com/libgdx/packr)  tool
 
 ```bash
-java -jar packr-all.jar --platform windows64 --jdk "PATH_TO_JDK_17.0.2" --useZgcIfSupportedOs --executable Kubeson --classpath kubeson.jar --mainclass br.nom.penha.bruno.SuperMain --vmargs Xmx1G --output gerado-win
+java -jar packr-all.jar --platform windows64 --jdk "<DOWNLOAD ZIP FROM https://adoptopenjdk.net/releases.html>" --useZgcIfSupportedOs --executable Kubeson --classpath kubeson.jar --icon images/kubeson.ico --mainclass br.nom.penha.bruno.SuperMain --vmargs Xmx1G --output gerado-win3 
 ```
-This allow to export JRE together with exe file
+This allows to export JRE together with exe file
 
 # Create the installation file (for Linux)
 
 To create an exe file, execute the following command:
 
 ```bash
-jpackage --dest gerado-linux --app-version '2.1.0' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/app64.png --input shade --main-jar shade/kubeson.jar --main-class br.nom.penha.bruno.SuperMain 
+jpackage --dest gerado-linux --app-version '2.1.1' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/app64.png --input shade --main-jar shade/kubeson.jar --main-class br.nom.penha.bruno.SuperMain 
 ```
 
 And if you got this error during this execution, one possible soluction is by installing `fakeroot` on your Debian, like this:

@@ -71,7 +71,7 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
 
             @Override
             protected void updateItem(SelectorItem item, boolean empty) {
-                System.out.println("setButtonCell - updateItem");
+                //System.out.println("setButtonCell - updateItem");
             }
         });
 
@@ -84,7 +84,7 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
                 for (SelectorItem item : getItems()) {
 
                     if (item.isChecked()) {
-                        System.out.println("Clicked: " + item.isChecked());
+                        //System.out.println("Clicked: " + item.isChecked());
                         selected.add(new SelectedItem(item));
                         item.setChecked(false);
                     }

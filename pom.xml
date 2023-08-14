@@ -170,8 +170,14 @@
                 <version>${maven-jar-plugin.version}</version>
                 <configuration>
                     <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
                         <manifestEntries>
                             <Multi-Release>true</Multi-Release>
+                            <Developer>Bruno C. Penha</Developer>
+                            <Version>${project.version}</Version>
                         </manifestEntries>
                     </archive>
                 </configuration>

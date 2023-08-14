@@ -35,7 +35,8 @@ class InfoDialog extends Alert {
         //FIXME refreshUpgrade();
 
         setTitle(Configuration.APP_NAME);
-        setHeaderText("Kubeson - Version: " + this.getClass().getPackage().getImplementationVersion());
+
+        setHeaderText("Kubeson - Version: " + getClass().getPackage().getImplementationVersion());
 
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
