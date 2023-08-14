@@ -106,6 +106,7 @@ public class SelectorItem implements Comparable<SelectorItem> {
 
     public boolean isChecked() {
         if (checked != null) {
+            System.out.println(this.getText() + " " + checked.getValue() + " " + this.checked);
             return checked.getValue();
         }
         return false;

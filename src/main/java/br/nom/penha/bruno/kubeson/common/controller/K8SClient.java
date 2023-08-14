@@ -280,7 +280,7 @@ public final class K8SClient {
 
     public static List<StatusDetails> deletePod(String namespace, Pod pod) throws K8SApiException {
         try {
-            return client.pods().inNamespace(namespace).withName(pod.getFullResourceName()).delete();
+            return client.pods().inNamespace(namespace).withName(pod.getMetadata().getName()).delete();
         } catch (Exception e) {
             throw new K8SApiException(e);
         }

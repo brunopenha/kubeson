@@ -71,7 +71,7 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
 
             @Override
             protected void updateItem(SelectorItem item, boolean empty) {
-
+                System.out.println("setButtonCell - updateItem");
             }
         });
 

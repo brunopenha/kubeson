@@ -1,3 +1,5 @@
+shade/*
+out-win/*
 ### Code ###
 .vscode/*
 !.vscode/settings.json

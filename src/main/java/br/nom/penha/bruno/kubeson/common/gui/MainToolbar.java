@@ -41,7 +41,7 @@ public final class MainToolbar {
         toolbar.getItems().remove(1, toolbar.getItems().size() - 1);
         toolbar.getItems().addAll(1, toolbarComponent.getToolbarItems());
     }
-
+    // Close the log tab
     public static void clear() {
         toolbar.getItems().remove(1, toolbar.getItems().size() - 1);
         toolbar.getItems().add(1, emptyToolbox);

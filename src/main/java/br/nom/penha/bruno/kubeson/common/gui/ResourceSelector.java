@@ -1,6 +1,5 @@
 package br.nom.penha.bruno.kubeson.common.gui;
 
-import br.nom.penha.bruno.kubeson.Main;
 import br.nom.penha.bruno.kubeson.common.controller.K8SClient;
 import br.nom.penha.bruno.kubeson.common.controller.K8SClientListener;
 import br.nom.penha.bruno.kubeson.common.controller.K8SResourceChange;
@@ -11,11 +10,6 @@ import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClientBuilder;
 import io.fabric8.kubernetes.client.KubernetesClientException;
 import io.fabric8.kubernetes.client.NamespacedKubernetesClient;
-import io.kubernetes.client.openapi.ApiClient;
-import io.kubernetes.client.openapi.ApiException;
-import io.kubernetes.client.openapi.apis.CoreV1Api;
-import io.kubernetes.client.openapi.models.V1NamespaceList;
-import io.kubernetes.client.util.Config;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,10 +24,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.io.IOException;
-import java.net.NoRouteToHostException;
-import java.net.UnknownHostException;
 
 public final class ResourceSelector {
 
@@ -122,9 +112,7 @@ public final class ResourceSelector {
     }
 
     private static void updateNamespaceBox() {
-//        namespaceBox.getItems().clear();
         namespaceBox.setItems(namespaceList);
-//        namespaceBox.getItems().addAll(K8SClient.getNamespaces());
         namespaceBox.getSelectionModel().select(selectedNamespace);
     }
 
