@@ -9,6 +9,8 @@ Currently Kubeson only connects to the Kubernetes connection defined in the user
 
 # Features
 Kubeson provides the following features:
+
+* Select the Kubernetes namespace
 * Log level filters
 * Multiple tabs to visualize multiple pods simultaneously
 *	Multiple pods in a single tab
@@ -27,28 +29,14 @@ Kubeson provides the following features:
 * Upgrade button in the info section
 * Drag and drop log files
 
+
 # Installation
 
-Kubeson was build using Java 17, but it is not expect issues if this app is running using previous versions.
+For the Windows version, download this https://github.com/brunopenha/kubeson/releases/download/v2.1.1/kubeson-2.1.1.exe file and install it.
+It should open a Windows installation, but it is impossible to customize the install location for now. But once installed, you can find it on the Windows menu.
 
-One tip, this workaround was made to avoid security issue, but is not for this final version:
+For Ubuntu Linux installation, download https://github.com/brunopenha/kubeson/releases/download/v2.1.1/kubeson_2.1.1-1_amd64.deb and install it using `dpkg -i kubeson_2.1.1-1_amd64.deb` and run it from Ubuntu menu.
 
-```
-Caused by: java.lang.UnsupportedOperationException: No class provided, and an appropriate one cannot be found.
-at org.apache.logging.log4j.LogManager.callerClass(LogManager.java:573)
-```
-
-```bash
-zip d kubeson_openfx.jar 'META-INF/*.SF' 'META-INF/*.RSA' 'META-INF/*.DSA'
-```
-
-Also, it was mannually included this info in MANIFEST.MF file because Log4J issue:
-
-`Exception in thread "main" java.lang.SecurityException: Invalid signature file digest for Manifest main attributes`
-
-```java
-Multi-Release: true
-```
 
 # Create the installation file (for Windows)
 
@@ -58,6 +46,7 @@ To create an exe installer file, execute the following command:
 jpackage --type exe --input shade --dest gerado-win --main-jar kubeson.jar --main-class br.nom.penha.bruno.SuperMain --module-path "<PATH TO YOUR javafx-jmods-17.0.2>" --add-modules javafx.controls,javafx.fxml,javafx.web --app-version '2.1.1' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/kubeson.ico  --jlink-options --bind-services --verbose --win-console --win-shortcut --win-menu
 ```
 To create a quick exe from jar
+
 ```bash
 jpackage --type app-image --input shade --dest gerado-win --main-jar kubeson.jar --main-class br.nom.penha.bruno.SuperMain --module-path "<PATH TO YOUR javafx-jmods-17.0.2>" --add-modules javafx.controls,javafx.fxml,javafx.web --app-version '2.1.1' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/kubeson.ico  --jlink-options --bind-services --verbose --win-console
 ```
