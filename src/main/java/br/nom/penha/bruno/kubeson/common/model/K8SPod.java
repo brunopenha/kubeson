@@ -254,19 +254,20 @@ public class K8SPod {
             try (InputStream is = logWatch.getOutput()) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(is));
                 for (; ; ) {
-                    final String line = in.readLine();
-                    if (line == null) {
+                    if(null != in.readLine()){
+                        final String line = in.readLine();
+                        final LogLine logLine = new LogLine(line);
+                        if (podContainerThread.logLines.size() >= Configuration.MAX_LOG_LINES) {
+                            podContainerThread.podLogFeedListeners.forEach(
+                                    podLogFeedListener -> podLogFeedListener.onLogLineRemoved(podContainerThread.logLines.get(0)));
+                            podContainerThread.logLines.remove(0);
+                        }
+                        podContainerThread.logLines.add(logLine);
+                        for (int i = 0; i < podContainerThread.podLogFeedListeners.size(); i++) {
+                            podContainerThread.podLogFeedListeners.get(i).onNewLogLine(podContainerThread.logSources.get(i), logLine);
+                        }
+                    }else{
                         break;
-                    }
-                    final LogLine logLine = new LogLine(line);
-                    if (podContainerThread.logLines.size() >= Configuration.MAX_LOG_LINES) {
-                        podContainerThread.podLogFeedListeners.forEach(
-                                podLogFeedListener -> podLogFeedListener.onLogLineRemoved(podContainerThread.logLines.get(0)));
-                        podContainerThread.logLines.remove(0);
-                    }
-                    podContainerThread.logLines.add(logLine);
-                    for (int i = 0; i < podContainerThread.podLogFeedListeners.size(); i++) {
-                        podContainerThread.podLogFeedListeners.get(i).onNewLogLine(podContainerThread.logSources.get(i), logLine);
                     }
                 }
             } catch (InterruptedIOException e) {

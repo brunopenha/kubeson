@@ -46,7 +46,8 @@ public class Main extends Application {
         System.setProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager");
         System.setProperty("java.util.logging.config.file", "");
         System.setProperty("java.net.useSystemProxies", "true");
-
+        // to avoid ERROR StatusConsoleListener Could not reconfigure JMX
+        System.setProperty("log4j2.disable.jmx", Boolean.TRUE.toString());
 
         launch(args);
     }

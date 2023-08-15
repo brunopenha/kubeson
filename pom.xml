@@ -27,8 +27,11 @@
         <maven-exec-plugin.version>1.6.0</maven-exec-plugin.version>
         <maven-assembly-plugin.version>3.1.1</maven-assembly-plugin.version>
         <maven-ant-run-plugin.version>1.9.4</maven-ant-run-plugin.version>
+        <junit-jupiter.version>5.9.3</junit-jupiter.version>
+        <maven-model.version>3.3.9</maven-model.version>
     </properties>
     <dependencies>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -46,6 +49,15 @@
             <version>${javafx.version}</version>
             <classifier>linux</classifier>
         </dependency>
+        <!-- only for Linux building -->
+<!--        <dependency>-->
+<!--            <groupId>javax.naming</groupId>-->
+<!--            <artifactId>jndi</artifactId>-->
+<!--            <version>1.2.1</version>-->
+<!--            &lt;!&ndash; need to install jndi lib &ndash;&gt;-->
+<!--            &lt;!&ndash; mvn install:install-file -DgroupId=javax.naming -DartifactId=jndi -Dversion=1.2.1 -Dpackaging=jar -Dfile=src/lib/jndi.jar &ndash;&gt;-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
@@ -158,7 +170,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.9.3</version>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
