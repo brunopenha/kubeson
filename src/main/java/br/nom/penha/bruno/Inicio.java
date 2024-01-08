@@ -34,11 +34,23 @@ public class Inicio extends Application {
 	}
 
 	public static void main(String[] args) {
-		logger.debug("My Debug Log");
-		logger.info("My Info Log");
-		logger.warn("My Warn Log");
-		logger.error("My error log");
-		logger.fatal("My fatal log");
+		logger.info("Running app with Java Version " + System.getProperty("java.version") + " Arch " + System.getProperty("sun.arch.data.model"));
+
+		System.setProperty("java.util.logging.config.file", "");
+		// System props
+		System.setProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager");
+		System.setProperty("java.util.logging.config.file", "");
+		System.setProperty("java.net.useSystemProxies", "true");
+		// to avoid ERROR StatusConsoleListener Could not reconfigure JMX
+		System.setProperty("log4j2.disable.jmx", Boolean.TRUE.toString());
+
+		logger.debug("Checking Debug Log");
+		logger.info("Checking Info Log");
+		logger.warn("Checking Warn Log");
+		logger.error("Checking error log");
+		logger.fatal("Checking fatal log");
+
+
 
 		launch(args);
 	}

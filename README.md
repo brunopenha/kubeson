@@ -63,7 +63,7 @@ This allows to export JRE together with exe file
 To create an exe file, execute the following command:
 
 ```bash
-jpackage --type deb --input shade --dest gerado-linux --module-path /opt/javafx-jmods-21/:/opt/javafx-sdk-20.0.2/lib/ --main-jar kubeson.jar --main-class br.nom.penha.bruno.SuperMain --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.web --app-version '2.1.1' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/app64.png --jlink-options --bind-services --verbose --linux-deb-maintainer dev@bruno.penha.nom.br
+jpackage --type deb --input shade --dest gerado-linux --module-path /opt/javafx-jmods-21/:/opt/javafx-sdk-20.0.2/lib/ --main-jar kubeson.jar --main-class br.nom.penha.bruno.SuperMain --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.web --app-version '2.2.2' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/app64.png --jlink-options --bind-services --verbose --linux-deb-maintainer dev@bruno.penha.nom.br
 ```
 
 And if you got this error during this execution, one possible soluction is by installing `fakeroot` on your Debian, like this:

@@ -11,11 +11,11 @@ public class SuperMain {
     public static void main(String[] args) {
         logger.error("Running app with Java Version " + System.getProperty("java.version") + " Arch " + System.getProperty("sun.arch.data.model"));
 
-        logger.debug("My Debug Log");
-        logger.info("My Info Log");
-        logger.warn("My Warn Log");
-        logger.error("My error log");
-        logger.fatal("My fatal log");
+        logger.debug("Checking Debug Log");
+        logger.info("Checking Info Log");
+        logger.warn("Checking Warn Log");
+        logger.error("Checking error log");
+        logger.fatal("Checking fatal log");
 
         Main.main(args);
     }
