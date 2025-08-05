@@ -32,10 +32,10 @@ Kubeson provides the following features:
 
 # Installation
 
-For the Windows version, download this https://github.com/brunopenha/kubeson/releases/download/v2.1.1/kubeson-2.1.1.exe file and install it.
+For the Windows version, download this https://github.com/brunopenha/kubeson/releases/download/v2.3.0/kubeson-2.1.1.exe file and install it.
 It should open a Windows installation, but it is impossible to customize the install location for now. But once installed, you can find it on the Windows menu.
 
-For Ubuntu Linux installation, download https://github.com/brunopenha/kubeson/releases/download/v2.1.1/kubeson_2.1.1-1_amd64.deb and install it using `dpkg -i kubeson_2.1.1-1_amd64.deb` and run it from Ubuntu menu.
+For Ubuntu Linux installation, download https://github.com/brunopenha/kubeson/releases/download/v2.3.0/kubeson_2.1.1-1_amd64.deb and install it using `sudo dpkg -i kubeson_2.3.0_amd64.deb`, `sudo apt-get install -f` and run it from Ubuntu menu.
 
 
 # Create the installation file (for Windows)
@@ -48,7 +48,7 @@ jpackage --type exe --input shade --dest gerado-win --main-jar kubeson.jar --mai
 To create a quick exe from jar
 
 ```bash
-jpackage --type app-image --input shade --dest gerado-win --main-jar kubeson.jar --main-class br.nom.penha.bruno.SuperMain --module-path "<PATH TO YOUR javafx-jmods-17.0.2>" --add-modules javafx.controls,javafx.fxml,javafx.web --app-version '2.1.1' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/kubeson.ico  --jlink-options --bind-services --verbose --win-console
+jpackage --type app-image --input shade --dest gerado-win --main-jar kubeson.jar --main-class br.nom.penha.bruno.SuperMain --module-path "<PATH TO YOUR javafx-jmods-17.0.2>" --add-modules javafx.controls,javafx.fxml,javafx.web --app-version '2.3.0' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/kubeson.ico  --jlink-options --bind-services --verbose --win-console
 ```
 
 Another way to create it, is using this [packr](https://github.com/libgdx/packr)  tool
@@ -60,14 +60,42 @@ This allows to export JRE together with exe file
 
 # Create the installation file (for Linux)
 
-To create an exe file, execute the following command:
+To create an deb file, execute the following command:
 
 ```bash
-jpackage --type deb --input shade --dest gerado-linux --module-path /opt/javafx-jmods-21/:/opt/javafx-sdk-20.0.2/lib/ --main-jar kubeson.jar --main-class br.nom.penha.bruno.SuperMain --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.web --app-version '2.2.2' --description 'Kubeson Kubernetes log viewer' --name 'kubeson' --vendor 'Bruno Penha' --icon images/app64.png --jlink-options --bind-services --verbose --linux-deb-maintainer dev@bruno.penha.nom.br
+jpackage \
+  --type deb \
+  --input shade \
+  --dest gerado-linux \
+  --module-path /opt/javafx-jmods-21/:/opt/javafx-sdk-20.0.2/lib/ \
+  --main-jar kubeson.jar \
+  --main-class br.nom.penha.bruno.SuperMain \
+  --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.web \
+  --app-version '2.3.0' \
+  --description 'Kubeson Kubernetes log viewer' \
+  --name 'kubeson' \
+  --vendor 'Bruno Penha' \
+  --icon images/app64.png \
+  --jlink-options --bind-services \
+  --verbose \
+  --linux-deb-maintainer dev@bruno.penha.nom.br
 ```
 
 And if you got this error during this execution, one possible soluction is by installing `fakeroot` on your Debian, like this:
 
 ```bash
 sudo apt install fakeroot
+```
+
+After generated the file, you can install with this:
+
+```shell
+sudo dpkg -i gerado-linux/kubeson_2.3.0_amd64.deb
+sudo apt-get install -f
+```
+
+To uninstall, do:
+
+```shell
+sudo apt remove kubeson
 ```
