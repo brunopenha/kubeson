@@ -32,10 +32,10 @@ Kubeson provides the following features:
 
 # Installation
 
-For the Windows version, download this https://github.com/brunopenha/kubeson/releases/download/v2.3.0/kubeson-2.1.1.exe file and install it.
+For the Windows version, download this https://github.com/brunopenha/kubeson/releases/download/v2.3.0/kubeson-2.3.0.exe file and install it.
 It should open a Windows installation, but it is impossible to customize the install location for now. But once installed, you can find it on the Windows menu.
 
-For Ubuntu Linux installation, download https://github.com/brunopenha/kubeson/releases/download/v2.3.0/kubeson_2.1.1-1_amd64.deb and install it using `sudo dpkg -i kubeson_2.3.0_amd64.deb`, `sudo apt-get install -f` and run it from Ubuntu menu.
+For Ubuntu Linux installation, download https://github.com/brunopenha/kubeson/releases/download/v2.3.0/kubeson_2.3.0_amd64.deb and install it using `sudo dpkg -i kubeson_2.3.0_amd64.deb`, `sudo apt-get install -f` and run it from Ubuntu menu.
 
 
 # Create the installation file (for Windows)
