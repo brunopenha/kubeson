@@ -14,6 +14,7 @@ import br.nom.penha.bruno.kubeson.common.gui.ResourceSelector;
 import br.nom.penha.bruno.kubeson.common.model.ItemType;
 import br.nom.penha.bruno.kubeson.common.model.K8SConfigMap;
 import br.nom.penha.bruno.kubeson.common.model.K8SPod;
+import br.nom.penha.bruno.kubeson.common.model.SelectedItem;
 import br.nom.penha.bruno.kubeson.common.model.SelectorItem;
 import br.nom.penha.bruno.kubeson.common.util.ThreadFactory;
 import io.fabric8.kubernetes.api.model.Pod;
@@ -26,6 +27,7 @@ import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClientException;
 import io.fabric8.kubernetes.client.dsl.LogWatch;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -217,7 +219,7 @@ public final class K8SClient {
 
     public static List<SelectorItem> getPodSelectorList(String namespace) {
         Map<String, K8SPod> appLabelPods = new TreeMap<>();
-        List<SelectorItem> podItems = new ArrayList<>();
+        ObservableList<SelectorItem> podItems = FXCollections.observableArrayList();
         List<SelectorItem> configMapItems = new ArrayList<>();
 
         pods.forEach((uid, pod) -> {
@@ -254,7 +256,7 @@ public final class K8SClient {
         Collections.sort(podItems);
         Collections.sort(configMapItems);
 
-        List<SelectorItem> res = new ArrayList<>();
+        ObservableList<SelectorItem> res = FXCollections.observableArrayList();
         res.add(new SelectorItem("App Labels:"));
         appLabelPods.forEach((appLabel, pod) -> res.add(new SelectorItem(pod, appLabel, ItemType.LABEL)));
         res.add(new SelectorItem("Pods:"));

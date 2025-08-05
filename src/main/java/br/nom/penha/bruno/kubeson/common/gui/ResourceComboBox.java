@@ -11,6 +11,8 @@ import br.nom.penha.bruno.kubeson.common.model.SelectorItem;
 import br.nom.penha.bruno.kubeson.common.model.TabType;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -80,7 +82,7 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
 
 
             if (!newValue) {
-                List<SelectedItem> selected = new ArrayList<>();
+                ObservableList<SelectedItem> selected = FXCollections.observableArrayList();
                 for (SelectorItem item : getItems()) {
 
                     if (item.isChecked()) {
@@ -91,6 +93,7 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
                 }
 
                 if (selected.size() > 1) {
+
                     MainTabPane.createLogTab(selected, new TabLabel(TabType.LOG, "Group " + groupNumber));
                     groupNumber++;
                 } else if (getSelectionModel().getSelectedItem() != null

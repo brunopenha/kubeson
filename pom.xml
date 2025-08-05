@@ -253,6 +253,40 @@
                     </execution>
                 </executions>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-ant-run-plugin</artifactId>-->
+<!--                <version>${maven-ant-run-plugin.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>create-artifacts</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>run</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <target>-->
+<!--                                <exec executable="jpackage" failonerror="true">-->
+<!--                                    <arg line="&#45;&#45;version"/>-->
+<!--                                </exec>-->
+<!--                                <exec executable="jpackage" failonerror="true">-->
+<!--                                    <arg line="&#45;&#45;help"/>-->
+<!--                                </exec>-->
+<!--                                <exec executable="jpackage" failonerror="true">-->
+<!--                                    <arg line="&#45;&#45;input target/dist"/>-->
+<!--                                    <arg line="&#45;&#45;main-jar ${project.artifactId}-${project.version}.jar"/>-->
+<!--                                    <arg line="&#45;&#45;main-class br.nom.penha.bruno.SuperMain"/>-->
+<!--                                    <arg line="&#45;&#45;dest target"/>-->
+<!--                                    <arg line="&#45;&#45;name ${project.artifactId}"/>-->
+<!--                                    <arg line="&#45;&#45;app-version ${project.version}"/>-->
+<!--                                    <arg line="&#45;&#45;type exe"/>-->
+<!--                                    <arg line="&#45;&#45;verbose"/>-->
+<!--                                </exec>-->
+<!--                            </target>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 </project>
