@@ -200,8 +200,8 @@ public class LogTab extends TabBase<LogToolbar> {
 
         // Start printing log lines
         selectedItems.forEach(selectedItem -> {
-            LOGGER.error("selectedItem -> " + selectedItem.getText());
             if(null != selectedItem.getPod()){
+                LOGGER.debug("selectedItem -> {}", selectedItem.getText());
                 selectedItem.getPod()
                         .addListener(selectedItem.getContainer(), getLogSource(selectedItem.getText(), selectedItems.size()), this.podLogFeedListener,
                                 showLogsFromStart);

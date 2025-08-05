@@ -9,13 +9,7 @@ public class SuperMain {
     private static final Logger logger = LogManager.getLogger(SuperMain.class);
 
     public static void main(String[] args) {
-        logger.error("Running app with Java Version " + System.getProperty("java.version") + " Arch " + System.getProperty("sun.arch.data.model"));
-
-        logger.debug("My Debug Log");
-        logger.info("My Info Log");
-        logger.warn("My Warn Log");
-        logger.error("My error log");
-        logger.fatal("My fatal log");
+        logger.info("Running app with Java Version " + System.getProperty("java.version") + " Arch " + System.getProperty("sun.arch.data.model"));
 
         Main.main(args);
     }

@@ -1,46 +1,83 @@
 package br.nom.penha.bruno;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
+import br.nom.penha.bruno.kubeson.common.gui.MainToolbar;
+import br.nom.penha.bruno.kubeson.common.util.ThreadFactory;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Inicio extends Application {
 
 	private static final Logger logger = LogManager.getLogger(Inicio.class);
-	@Override
-	public void start(Stage primaryStage) throws IOException {
-
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/paginas_fxml/LogViewer.fxml"));
-		Parent content = loader.load();
-
-		Scene scene = new Scene(content);
-		String appCss = getClass().getResource("/css/application.css").toExternalForm();
-		scene.getStylesheets().add(appCss);
-		primaryStage.getIcons().addAll(getAppIcons());
-		primaryStage.setScene(scene);
-	}
+	private static Application application;
+	private static Stage primaryStage;
 
 	public static void main(String[] args) {
-		logger.debug("My Debug Log");
-		logger.info("My Info Log");
-		logger.warn("My Warn Log");
-		logger.error("My error log");
-		logger.fatal("My fatal log");
+		logger.info("Running app with Java Version " + System.getProperty("java.version") + " Arch " + System.getProperty("sun.arch.data.model"));
+
+		// Configurações do sistema (semelhante à classe Main)
+		System.setProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager");
+		System.setProperty("java.net.useSystemProxies", "true");
+		System.setProperty("log4j2.disable.jmx", Boolean.TRUE.toString());
 
 		launch(args);
+	}
+
+	@Override
+	public void start(Stage stage) throws IOException {
+		// Define o manipulador de exceções e as referências estáticas
+		Thread.setDefaultUncaughtExceptionHandler(Inicio::logError);
+		Inicio.application = this;
+		Inicio.primaryStage = stage;
+
+		// 1. Cria um VBox como layout raiz, assim como na classe Main
+		VBox root = new VBox();
+
+		// 2. Carrega o conteúdo da sua tela principal a partir do FXML
+		Parent logViewerContent = FXMLLoader.load(getClass().getResource("/paginas_fxml/LogViewer.fxml"));
+		// Faz com que o conteúdo do log cresça para preencher o espaço vertical disponível
+		VBox.setVgrow(logViewerContent, Priority.ALWAYS);
+
+		// 3. Adiciona a barra de ferramentas e o conteúdo do FXML ao layout raiz
+		root.getChildren().addAll(MainToolbar.draw(), logViewerContent);
+
+		// 4. Cria a cena com um tamanho padrão
+		Scene scene = new Scene(root, 1600, 800);
+
+		// 5. Aplica a folha de estilos
+		String appCss = getClass().getResource("/css/application.css").toExternalForm();
+		scene.getStylesheets().add(appCss);
+
+		// 6. Configura e exibe a janela principal (Stage)
+		stage.setTitle("Kubeson - Log Viewer");
+		stage.getIcons().addAll(getAppIcons());
+		stage.setScene(scene);
+		stage.setMaximized(true);
+		stage.setOnCloseRequest(event -> ThreadFactory.shutdownAll());
+		stage.show();
+	}
+
+	private static void logError(Thread t, Throwable e) {
+		if (Platform.isFxApplicationThread()) {
+			logger.error("An error occurred in JavaFx thread", e);
+		} else {
+			logger.error("An unexpected error occurred", e);
+		}
 	}
 
 	public static List<Image> getAppIcons() {
@@ -58,11 +95,10 @@ public class Inicio extends Application {
 
 
 	public static Image getImage(String path) {
-		InputStream is = Inicio.class.getClassLoader().getResourceAsStream(path);
+		InputStream is = Inicio.class.getResourceAsStream(path);
 		if (is != null) {
 			return new Image(is);
 		}
-
 		return null;
 	}
 
@@ -73,7 +109,6 @@ public class Inicio extends Application {
 		WebEngine webEngine = webview.getEngine();
 		String jsonViewer = this.getClass().getClassLoader().getResource("json-viewer/index.html").toExternalForm();
 		webEngine.load(jsonViewer);
-
 		return webview;
 	}
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Button?>
+<ToolBar fx:id="toolbar" xmlns:fx="http://javafx.com/fxml/1">
+    <Button fx:id="saveButton" text="Salvar" onAction="#onSave"/>
+    <Button fx:id="deleteButton" text="Deletar" onAction="#onDelete"/>
+</ToolBar>

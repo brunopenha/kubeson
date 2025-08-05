@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>br.nom.penha.bruno</groupId>
     <artifactId>kubeson</artifactId>
-    <version>2.1.1</version>
+    <version>2.3.0</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
@@ -12,7 +12,7 @@
         <log4j.version>2.20.0</log4j.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <!-- https://github.com/fabric8io/kubernetes-client -->
-        <kubernetes-client.version>6.8.0</kubernetes-client.version>
+        <kubernetes-client.version>7.3.1</kubernetes-client.version>
         <flowless.version>0.7.0</flowless.version>
         <jackson.version>2.15.1</jackson.version>
         <proxy-vole.version>1.0.18</proxy-vole.version>
@@ -31,7 +31,6 @@
         <maven-model.version>3.3.9</maven-model.version>
     </properties>
     <dependencies>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -254,40 +253,6 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-ant-run-plugin</artifactId>-->
-<!--                <version>${maven-ant-run-plugin.version}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>create-artifacts</id>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>run</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <target>-->
-<!--                                <exec executable="jpackage" failonerror="true">-->
-<!--                                    <arg line="&#45;&#45;version"/>-->
-<!--                                </exec>-->
-<!--                                <exec executable="jpackage" failonerror="true">-->
-<!--                                    <arg line="&#45;&#45;help"/>-->
-<!--                                </exec>-->
-<!--                                <exec executable="jpackage" failonerror="true">-->
-<!--                                    <arg line="&#45;&#45;input target/dist"/>-->
-<!--                                    <arg line="&#45;&#45;main-jar ${project.artifactId}-${project.version}.jar"/>-->
-<!--                                    <arg line="&#45;&#45;main-class br.nom.penha.bruno.SuperMain"/>-->
-<!--                                    <arg line="&#45;&#45;dest target"/>-->
-<!--                                    <arg line="&#45;&#45;name ${project.artifactId}"/>-->
-<!--                                    <arg line="&#45;&#45;app-version ${project.version}"/>-->
-<!--                                    <arg line="&#45;&#45;type exe"/>-->
-<!--                                    <arg line="&#45;&#45;verbose"/>-->
-<!--                                </exec>-->
-<!--                            </target>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 </project>

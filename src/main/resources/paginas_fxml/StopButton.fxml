@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  - Usa <fx:root> para definir este FXML como a "visão" de um componente customizado.
+  - O 'type' aponta para a classe do seu componente.
+  - Os namespaces 'xmlns' e 'xmlns:fx' são declarados.
+-->
+<fx:root type="br.nom.penha.bruno.kubeson.logs.gui.StopButton"
+         xmlns="http://javafx.com/javafx/17"
+         xmlns:fx="http://javafx.com/fxml/1"
+         styleClass="toolbar-button"
+         onAction="#handleStop"
+         text="Parar"/>

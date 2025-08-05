@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import br.nom.penha.bruno.kubeson.logs.gui.ClearButton?>
+<?import br.nom.penha.bruno.kubeson.logs.gui.StopButton?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+
+<ToolBar fx:id="logToolbar" xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="br.nom.penha.bruno.kubeson.logs.gui.LogToolbar">
+    <items>
+        <ClearButton fx:id="clearButton" onAction="#onClear"/>
+        <StopButton fx:id="stopButton" onAction="#onStop"/>
+
+        <TextField fx:id="searchField" promptText="Buscar..."/>
+        <Button fx:id="exportButton" text="Exportar" onAction="#onExport"/>
+    </items>
+</ToolBar>

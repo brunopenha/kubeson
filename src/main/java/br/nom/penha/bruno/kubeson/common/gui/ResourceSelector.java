@@ -6,6 +6,8 @@ import br.nom.penha.bruno.kubeson.common.controller.K8SResourceChange;
 import br.nom.penha.bruno.kubeson.common.model.K8SConfigMap;
 import br.nom.penha.bruno.kubeson.common.model.K8SPod;
 import io.fabric8.kubernetes.api.model.NamespaceList;
+import io.fabric8.kubernetes.client.Config;
+import io.fabric8.kubernetes.client.ConfigBuilder;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClientBuilder;
 import io.fabric8.kubernetes.client.KubernetesClientException;
@@ -57,8 +59,15 @@ public final class ResourceSelector {
         namespaceBox.setPrefWidth(110);
         KubernetesClient client  = null;
         NamespaceList lista;
-        client =  new KubernetesClientBuilder().build();
+        Config config = new ConfigBuilder()
+                .withConnectionTimeout(500) // 2 seconds
+                .withRequestTimeout(600) // 3 seconds
+                .build();
+
         try {
+            client = new KubernetesClientBuilder().withConfig(config).build();
+            client.getVersion();
+
             lista = client.namespaces().list();
             lista.getItems()
                     .stream()
@@ -66,17 +75,17 @@ public final class ResourceSelector {
                     .forEach((name) -> namespaceList.add(name));
         } catch (KubernetesClientException e) {
             Platform.runLater(() -> {
-                Alert dialog = new Alert(Alert.AlertType.ERROR, "Error to connect into minikube: \n Check your minikube then start Kubeson again."
-                        , ButtonType.OK);
-                LOGGER.error(e.getMessage());
-                LOGGER.error(e.getStackTrace());
+                String errorMessage = "Error connecting to Minikube. Please ensure it is running and correctly configured.";
+                if (e.getCause() instanceof java.net.ConnectException) {
+                    errorMessage = "Could not connect to Minikube. Please make sure it is started.";
+                } else if (e.getStatus() != null && (e.getStatus().getCode() == 401 || e.getStatus().getCode() == 403)) {
+                    errorMessage = "Authentication/Authorization error connecting to Kubernetes. Please check your kubeconfig.";
+                }
+
+                Alert dialog = new Alert(Alert.AlertType.ERROR, errorMessage, ButtonType.OK);
+                LOGGER.error("Failed to connect to Kubernetes", e);
                 dialog.show();
-                dialog.setOnCloseRequest(new EventHandler<DialogEvent>() {
-                    @Override
-                    public void handle(DialogEvent dialogEvent) {
-                        System.exit(1);
-                    }
-                });
+                dialog.setOnCloseRequest(dialogEvent -> System.exit(1));
             });
         }
 

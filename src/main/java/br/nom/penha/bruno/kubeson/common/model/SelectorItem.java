@@ -21,6 +21,8 @@ public class SelectorItem implements Comparable<SelectorItem> {
 
     private Property<Boolean> disabled;
 
+    private String groupName;
+
     public SelectorItem(K8SPod pod, String key, String text, ItemType type) {
         this.disabled = new SimpleBooleanProperty();
         this.checked = new SimpleBooleanProperty();
@@ -110,6 +112,14 @@ public class SelectorItem implements Comparable<SelectorItem> {
             return checked.getValue();
         }
         return false;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     public void setChecked(Boolean value) {

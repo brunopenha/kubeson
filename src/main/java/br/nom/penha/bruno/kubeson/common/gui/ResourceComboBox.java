@@ -57,9 +57,9 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
             listView.setPrefWidth(500);
             CheckBoxListCell result = new CheckBoxListCell();
             result.setOnMouseClicked(e -> {
-                        LOGGER.error("Event: " + e.toString());
-                        LOGGER.error("e.getTarget(): " + e.getTarget());
-                        LOGGER.error("e.getEventType().getName(): " + e.getEventType().getName());
+                        LOGGER.info("Event: " + e.toString());
+                        LOGGER.info("e.getTarget(): " + e.getTarget());
+                        LOGGER.info("e.getEventType().getName(): " + e.getEventType().getName());
                         //super.hide();
                     }
             );

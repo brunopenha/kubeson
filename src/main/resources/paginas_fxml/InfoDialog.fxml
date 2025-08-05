@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<DialogPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.nom.penha.bruno.kubeson.common.gui.InfoDialogController">
+    <content>
+        <Label fx:id="infoLabel" text="Informação"/>
+    </content>
+</DialogPane>
