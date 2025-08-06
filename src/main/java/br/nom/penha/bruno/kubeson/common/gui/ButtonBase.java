@@ -1,5 +1,6 @@
 package br.nom.penha.bruno.kubeson.common.gui;
 
+import br.nom.penha.bruno.kubeson.Main;
 import javafx.animation.PauseTransition;
 import javafx.css.PseudoClass;
 import javafx.scene.control.Button;
@@ -23,7 +24,7 @@ public abstract class ButtonBase extends Button implements GlobalKeyPressedEvent
     protected ButtonBase(String iconPath, String shortcutText) {
         super.setPrefHeight(45);
         super.setFocusTraversable(false);
-        Image img = br.nom.penha.bruno.Inicio.getImage(iconPath);
+        Image img = Main.getImage(iconPath);
         if (img != null) {
             super.setGraphic(new ImageView(img));
         }

@@ -1,0 +1,21 @@
+Installation Complete!
+
+Thank you for installing Kubeson - Kubernetes Log Viewer.
+
+How to Start:
+- After finishing the installation, you can open Kubeson directly by clicking the "Run Kubeson now" box and pressing Finish on the last setup screen.
+- You can also find Kubeson anytime in your Windows Start Menu, under 'Kubeson'.
+
+Features:
+- Visualize and filter Kubernetes pod logs in multiple tabs.
+- Enhanced JSON viewer with collapsible arrays and syntax highlighting.
+- Fast search, custom log level coloring, and log export capabilities.
+- Integration with your Kubernetes configuration in the .kube directory.
+
+Uninstallation:
+- To uninstall Kubeson, go to Windows "Add or Remove Programs" and remove "Kubeson" as you would any other application.
+
+Support & Updates:
+- For more info, support, and new releases, visit: https://github.com/brunopenha/kubeson
+
+Enjoy using Kubeson!
