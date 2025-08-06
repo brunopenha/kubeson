@@ -1,5 +1,5 @@
 shade/*
-out-win/*
+gerado-win-innosetup/*
 ### Code ###
 .vscode/*
 !.vscode/settings.json

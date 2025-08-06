@@ -15,16 +15,12 @@ public class ConfigMapToolbar extends IToolbar {
     @FXML
     private Button deleteButton;
 
-    private ConfigMapDataNameSelector configMapDataNameSelector;
-
-    private SaveConfigMapDataButton saveConfigMapDataButton;
-
-    private DeletePodsButton deletePodsButton;
+    private final ConfigMapDataNameSelector configMapDataNameSelector;
 
     public ConfigMapToolbar(ConfigMapTab configMapTab) {
         configMapDataNameSelector = new ConfigMapDataNameSelector(configMapTab);
-        saveConfigMapDataButton = new SaveConfigMapDataButton(configMapTab);
-        deletePodsButton = new DeletePodsButton(configMapTab);
+        SaveConfigMapDataButton saveConfigMapDataButton = new SaveConfigMapDataButton(configMapTab);
+        DeletePodsButton deletePodsButton = new DeletePodsButton(configMapTab);
 
         HBox centralArea = new HBox(configMapDataNameSelector, saveConfigMapDataButton, deletePodsButton);
         centralArea.setSpacing(40);
@@ -39,15 +35,4 @@ public class ConfigMapToolbar extends IToolbar {
     public void refreshConfigMapDataNameSelector() {
         configMapDataNameSelector.refresh();
     }
-
-    @FXML
-    private void onSave() {
-        // Ação de salvar
-    }
-
-    @FXML
-    private void onDelete() {
-        // Ação de deletar
-    }
-
 }

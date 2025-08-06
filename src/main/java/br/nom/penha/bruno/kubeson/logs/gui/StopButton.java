@@ -18,7 +18,7 @@ public final class StopButton extends ButtonBase {
     public StopButton(LogTab logTab) {
         super("/icons/stop.png", "_STOP LOG FEED");
         super.setOnAction(event -> logTab.stop());
-        loadFxml();
+        //loadFxml(); // Preciso corrigir isso antes de migrar para FXML
     }
 
     private void loadFxml() {

@@ -6,11 +6,7 @@ import br.nom.penha.bruno.kubeson.common.gui.TabPill.Orientation;
 import br.nom.penha.bruno.kubeson.logs.model.HttpMethod;
 import br.nom.penha.bruno.kubeson.logs.model.LogCategory;
 import br.nom.penha.bruno.kubeson.logs.model.LogLevel;
-import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -19,24 +15,10 @@ import javafx.scene.text.Text;
 
 public class LogToolbar extends IToolbar {
 
-    @FXML
-    private ToolBar logToolbar;
-
-    @FXML
-    private Button exportButton;
-
-    @FXML
-    private TextField searchField;
-
-    private LogTab logTab; // Mantenha uma referência se precisar
-
-
     private Text searchCounter;
 
-    @FXML
     private ClearButton clearButton;
 
-    @FXML
     private StopButton stopButton;
 
     private SearchBox searchBox;
@@ -95,39 +77,4 @@ public class LogToolbar extends IToolbar {
     public void printCounter(String text) {
         searchCounter.setText(text);
     }
-    // Construtor padrão usado pelo FXML
-    public LogToolbar() {
-        super();
-    }
-
-    // Para injetar a dependência DEPOIS que o FXML for carregado
-    public void setLogTab(LogTab logTab) {
-        this.logTab = logTab;
-
-        // Se precisar configurar os botões com o logTab, faça aqui
-        // Ex: clearButton.setLogTab(logTab);
-        // Ex: stopButton.setLogTab(logTab);
-    }
-
-    @FXML
-    private void onClear() {
-        if (logTab != null) {
-            logTab.reset();
-            System.out.println("Limpando logs...");
-        }
-    }
-
-    @FXML
-    private void onStop() {
-        if (logTab != null) {
-            logTab.stop();
-            System.out.println("Parando logs...");
-        }
-    }
-
-    @FXML
-    private void onExport() {
-        System.out.println("Exportando logs...");
-    }
-
 }

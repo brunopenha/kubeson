@@ -1,8 +1,6 @@
 package br.nom.penha.bruno.kubeson.common.gui;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import br.nom.penha.bruno.kubeson.Main;
 import br.nom.penha.bruno.kubeson.common.model.ItemType;
@@ -21,7 +19,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.Skin;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -59,9 +56,9 @@ public class ResourceComboBox extends ComboBox<SelectorItem> {
             listView.setPrefWidth(500);
             CheckBoxListCell result = new CheckBoxListCell();
             result.setOnMouseClicked(e -> {
-                        LOGGER.info("Event: " + e.toString());
-                        LOGGER.info("e.getTarget(): " + e.getTarget());
-                        LOGGER.info("e.getEventType().getName(): " + e.getEventType().getName());
+                        LOGGER.debug("Event: " + e.toString());
+                        LOGGER.debug("e.getTarget(): " + e.getTarget());
+                        LOGGER.debug("e.getEventType().getName(): " + e.getEventType().getName());
                         //super.hide();
                     }
             );
